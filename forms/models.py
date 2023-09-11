@@ -68,8 +68,26 @@ class InvestorRegistration(models.Model):
   countryOfResidence=models.CharField(max_length=500, blank=True)
   provinceOfResidence=models.CharField(max_length=500, blank=True)
   companyName=models.CharField(max_length=500, blank=True)
-  investmentCeiling=models.CharField(max_length=500, blank=True)
+  interestes=models.CharField(max_length=500, blank=True)
   preferredAreas=models.CharField(max_length=500, blank=True)
   howDidYouKnowUs=models.CharField(max_length=500, blank=True)
+  createdAt=models.DateTimeField(auto_now_add=True)
+  updatedAt=models.DateTimeField(auto_now=True)
+
+class Entrepreuneur(models.Model):
+  email = models.EmailField()
+  companyName=models.CharField(max_length=300)
+  phone=models.CharField(max_length=300)
+  website=models.CharField(max_length=500)
+  fieldOfProfessional=models.CharField(max_length=500)
+  createdAt=models.DateTimeField(auto_now_add=True)
+  updatedAt=models.DateTimeField(auto_now=True)
+
+class ApplyJob(models.Model):
+  firstName=models.CharField(max_length=500)
+  lastName=models.CharField(max_length=500)
+  email=models.EmailField()
+  phoneNumber=models.CharField(max_length=250,blank=True)
+  cvFile=models.FileField(upload_to='cv-files',editable=True)
   createdAt=models.DateTimeField(auto_now_add=True)
   updatedAt=models.DateTimeField(auto_now=True)

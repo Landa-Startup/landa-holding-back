@@ -1,4 +1,4 @@
-from .models import StartUpsForm,ContactUs,PartnerMembership,InvestorRegistration
+from .models import StartUpsForm,ContactUs,PartnerMembership,InvestorRegistration,Entrepreuneur,ApplyJob
 from rest_framework import serializers
 
 class StartupFormSerializer(serializers.ModelSerializer):
@@ -28,4 +28,15 @@ class InvestorRegistrationSerializer(serializers.ModelSerializer):
         model = InvestorRegistration
         fields = '__all__'
         read_only_fields = ['id','createdAt']
-    
+
+class EntrepreuneurSerializer(serializers.ModelSerializer):
+    class Meta:
+        model= Entrepreuneur
+        fields = '__all__'
+        read_only_fields = ['id','createdAt']
+
+class ApplyJobSerializer(serializers.ModelSerializer):
+    class Meta:
+        model= ApplyJob
+        fields = '__all__'
+        read_only_fields = ['id','createdAt']

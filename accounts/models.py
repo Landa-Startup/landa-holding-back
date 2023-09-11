@@ -24,8 +24,3 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.email
-
-class EmployeAndEmployer(models.Model):
-    employe = models.ForeignKey(CustomUser,on_delete=models.CASCADE)
-    employer = models.ForeignKey(CustomUser,on_delete=models.CASCADE)
-    

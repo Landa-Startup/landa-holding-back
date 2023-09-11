@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import CustomUser,EmployeAndEmployer
+from .models import CustomUser
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
@@ -23,16 +23,3 @@ class RegisterSerializer(serializers.ModelSerializer):
         user.save()
         return user
     
-class EmployeAndEmployer(serializers.ModelSerializer):
-    employer = serializers.SerializerMethodField(read_only=True)
-    employe = serializers.SerializerMethodField(read_only=True)
-    class Meta:
-        model = EmployeAndEmployer
-        fields={
-            'employe',
-            'employer'
-        }
-    def get_employer(self,obj):
-        return{
-            "employe" : obj.employe.email
-        }
