@@ -16,7 +16,11 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     date_joined = models.DateTimeField(default=timezone.now)
+    employer = models.ManyToManyField("CustomUser")
+    emails = models.ManyToManyField("CustomUser",related_name="user_emails")
 
+    
+    
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ['phone_number','code','id_number']
 
