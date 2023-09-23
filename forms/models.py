@@ -1,5 +1,5 @@
 from django.db import models
-
+from accounts.models import CustomUser
 # Create your models here.
 
 class StartUpsForm(models.Model):
@@ -91,3 +91,12 @@ class ApplyJob(models.Model):
   cvFile=models.FileField(upload_to='cv-files',editable=True)
   createdAt=models.DateTimeField(auto_now_add=True)
   updatedAt=models.DateTimeField(auto_now=True)
+  
+class Vacation(models.Model):
+  user = models.ManyToManyField(CustomUser,related_name="user_vacations")
+  start_time = models.DateTimeField()
+  end_time = models.DateTimeField()
+  status = models.BooleanField(default=False)
+  created_at = models.DateTimeField(auto_now_add=True)
+  updated_at = models.DateTimeField(auto_now=True)
+  

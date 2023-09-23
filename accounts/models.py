@@ -18,13 +18,21 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     date_joined = models.DateTimeField(default=timezone.now)
     employer = models.ManyToManyField("CustomUser")
     emails = models.ManyToManyField("CustomUser",related_name="user_emails")
-
+    roles = models.ManyToManyField("Roles",related_name="users_role")
     
     
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = ['phone_number','code','id_number']
+    REQUIRED_FIELDS = ['phone_number','code','id_number','first_name','last_name']
 
     objects = CustomUserManager()
 
     def __str__(self):
-        return self.email
+        return self.first_name + " " + self.last_name
+
+
+class Roles(models.Model):
+    role = models.CharField("role name",max_length=300)
+    
+    def __str__(self):
+        return self.role
+    
