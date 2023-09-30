@@ -1,10 +1,18 @@
 from django.urls import path
-from knox.views import LogoutView
-from .views import RegisterAPI,LoginAPI
-app_name= "accounts"
+from .views import HelloView
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+    TokenVerifyView
+)
+
+from .views import GenerateTokenView
+
+app_name = "accounts"
+
 urlpatterns = [
-    path('register',RegisterAPI.as_view(),name='register'),
-    path('login',LoginAPI.as_view(),name='login'),
-    path('logout',LogoutView.as_view(),name="logout"),
-    
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
+    path('hello/', HelloView.as_view(), name='hello'), # test jwt token
 ]

@@ -1,45 +1,42 @@
-from django.shortcuts import render
-
-# Create your views here.
-from rest_framework import generics,permissions,status,views
+from rest_framework import status
+from rest_framework.views import APIView
 from rest_framework.response import Response
-from knox.models import AuthToken
-from knox.views import LoginView,APIView
-from rest_framework.authtoken.serializers import AuthTokenSerializer
-from .serializers import RegisterSerializer,UserSerializer
-from django.contrib.auth import login
-from django.core.cache import cache
+from rest_framework_simplejwt.tokens import RefreshToken
+from django.contrib.auth.models import User
+from rest_framework import status
+from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
 
 
-class RegisterAPI(generics.GenericAPIView):
-    serializer_class=RegisterSerializer
+class HelloView(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def get(self, request):
+        content = {'message': 'Hello, World!'}
+        return Response(content)
+
+
+from rest_framework_simplejwt.tokens import Token
+
+class CustomPayload(Token):
+    def __init__(self, token):
+        super().__init__(token)
+
+    @property
+    def role(self):
+        # Replace this with logic to get the user's role
+        return self['roles']
     
-    def post(self,request,*args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        user = serializer.save()
-        return Response({
-            "user": UserSerializer(user,context=self.get_serializer_context()).data,
-            "token": AuthToken.objects.create(user)[1]
-        })
 
-class LoginAPI(LoginView):
-    permission_classes = (permissions.AllowAny,)
-    global user_role
-    def post(self,request,format=None):
-        serializer = AuthTokenSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        user = serializer.validated_data['user']
-        login(request,user)
-
-        user_role = cache.get('custom_data')
-
-                
-        custom_data={"user_role":user_role}
-        
-        response_data = super(LoginAPI,self).post(request,format=None)
-        response_data.data.update(custom_data)
-        
-        return Response(response_data.data)
-
-    
+class GenerateTokenView(APIView):
+    def post(self, request):
+        user = request.user  # Replace this with your user object
+        if user:
+            refresh = RefreshToken.for_user(user)
+            custom_payload = CustomPayload(refresh.access_token)
+            custom_payload['roles'] = 'user'  # Replace with the actual role for the user
+            return Response({'access_token': str(refresh.access_token)}, status=status.HTTP_200_OK)
+        else:
+            return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)

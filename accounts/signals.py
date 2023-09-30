@@ -1,5 +1,5 @@
 # signals.py
 
-from django.dispatch import Signal
+# from django.dispatch import Signal
 
-custom_signal = Signal()
+# custom_signal = Signal()
