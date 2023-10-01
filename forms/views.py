@@ -9,7 +9,7 @@ from .serializers import StartupFormSerializer,ContactUsSerializer,PartnerMember
 # Create your views here.
 
 class StartUpsFormView(CreateAPIView):
-    queryset = StartUpsForm.objects.all()
+    queryset = StartUpsForm.objects.all() #TODO: delete this statement
     serializer_class = StartupFormSerializer
     parser_classes = [FormParser,MultiPartParser]
     http_method_names = ['post']
