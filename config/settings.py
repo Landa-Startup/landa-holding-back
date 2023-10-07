@@ -30,6 +30,16 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+EMAIL_HOST_USER = 'merajbighamian@gmail.com'     # Your SMTP username
+EMAIL_HOST_PASSWORD = "pbronjlmwuuzcmjr" # Your SMTP password
+# DEFAULT_FROM_EMAIL = 'merajbighamian@gmail.com'
+
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -121,7 +131,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Tehran'
 
 USE_I18N = True
 
@@ -161,7 +171,7 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 # Define Auth User Model
-AUTH_USER_MODEL = "accounts.CustomUser"
+AUTH_USER_MODEL = "accounts.User"
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
@@ -211,9 +221,3 @@ SIMPLE_JWT = {
   # ...
 }
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'your@gmail.com'  # Replace with your Gmail email address
-EMAIL_HOST_PASSWORD = 'your_password'  # Replace with your Gmail password or an app-specific password

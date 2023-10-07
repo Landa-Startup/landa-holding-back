@@ -1,18 +1,28 @@
-from .models import Vacation
-from django.db import models
 from django.dispatch import receiver
 from django.core.mail import send_mail
+from django.db.models.signals import post_save
+from django.contrib.auth.models import User  # Import the User model if not already imported
+from .models import Vacation  # Import the Vacation model from your app's models
 
-
-@receiver(models.signals.post_save, sender=Vacation)
+@receiver(post_save, sender=Vacation)
 def send_vacation_email(sender, instance, created, **kwargs):
     if created:
         # Define the email subject and message
-        print(instance.user_id)
+        user = User.objects.get(id=instance.user_id)
+        
         subject = "New Vacation Request"
         message = f"A new vacation request has been created.\nStart Time: {instance.start_time}\nEnd Time: {instance.end_time}"
-        from_email = "your@email.com"  # Replace with your email address
-        recipient_list = ["recipient@email.com"]  # Replace with the recipient's email address
+        from_email = "merajbighamian@gmail.com"  # Replace with your email address
+        employer_list = [user.employer.email]  # Replace with the recipient's email address
 
         # Send the email
-        send_mail(subject, message, from_email, recipient_list)
+        send_mail(subject, message, from_email, employer_list)
+        
+        emails_users = user.emails.all()
+        for email_user in emails_users: 
+          if email_user.email == employer_list[0]:   
+            pass  
+          else:
+            subject_emails = "this is subject"
+            email = email_user.email
+            send_mail(subject_emails, "this is email", from_email, [email])
