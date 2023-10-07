@@ -16,7 +16,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     date_joined = models.DateTimeField(default=timezone.now)
-    employer = models.ManyToManyField("CustomUser")
+    employer = models.ForeignKey("CustomUser",verbose_name="employer",on_delete=models.CASCADE)
     emails = models.ManyToManyField("CustomUser",related_name="user_emails")
     roles = models.ManyToManyField("Roles",related_name="users_role")
     
