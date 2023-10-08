@@ -1,4 +1,4 @@
-from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin,Group
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
@@ -32,7 +32,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 class Roles(models.Model):
     role = models.CharField("role name",max_length=300)
-    
+    group = models.ManyToManyField(Group, verbose_name=_("group role"))  
     def __str__(self):
         return self.role
     

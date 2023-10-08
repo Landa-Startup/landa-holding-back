@@ -2,7 +2,7 @@ from django.db import models
 from accounts.models import User
 from django.dispatch import receiver
 from django.core.mail import send_mail
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save,pre_save
 from uuid import uuid4
 
 # Create your models here.
@@ -102,10 +102,20 @@ class Vacation(models.Model):
   start_time = models.DateTimeField()
   end_time = models.DateTimeField()
   STATUS = ((1,'Pending'),(2,'Approved'),(3,'Decline'))
-  status = models.IntegerField(choices=STATUS)
+  status = models.IntegerField(choices=STATUS,default=1)
   uuid = models.UUIDField(default=uuid4, editable=False, unique=True)
   created_at = models.DateTimeField(auto_now_add=True)
   updated_at = models.DateTimeField(auto_now=True)
+  
+  class Meta:
+        permissions = [
+          ("can_create_mymodel", "Can create mymodel"),
+          ("can_view_mymodel", "Can view mymodel"),
+          ("can_edit_mymodel", "Can edit mymodel"),
+          ("can_delete_mymodel", "Can delete mymodel"),
+        ]
+  
+  
   
   def __str__(self):
     user = User.objects.get(id=self.user_id) 
@@ -114,25 +124,7 @@ class Vacation(models.Model):
   
 
 
-@receiver(post_save, sender=Vacation)
-def send_vacation_email(sender, instance, created, **kwargs):
-    if created:
-        # Define the email subject and message
-        user = User.objects.get(id=instance.user_id)
-        
-        subject = "New Vacation Request"
-        message = f"A new vacation request has been created.\nStart Time: {instance.start_time}\nEnd Time: {instance.end_time} <html><a href='127.0.0.1:8000/approve/{instance.uuid}'>Approve</a><a href='127.0.0.1:8000/decline/{instance.uuid}'>Decline</a></html>"
-        from_email = "merajbighamian@gmail.com"  # Replace with your email address
-        employer_list = [user.employer.email]  # Replace with the recipient's email address
 
-        # Send the email
-        send_mail(subject, message, from_email, employer_list)
         
-        emails_users = user.emails.all()
-        for email_user in emails_users: 
-          if email_user.email == employer_list[0]:   
-            pass  
-          else:
-            subject_emails = "this is subject"
-            email = email_user.email
-            send_mail(subject_emails, "this is email", from_email, [email])
+
+
