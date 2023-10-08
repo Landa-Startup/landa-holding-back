@@ -120,11 +120,6 @@ class Vacation(models.Model):
   def __str__(self):
     user = User.objects.get(id=self.user_id) 
     return user.first_name + " " + user.last_name
-  
-  
 
-
-
-        
 
 
