@@ -19,6 +19,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     employer = models.ForeignKey("User",verbose_name="employer",on_delete=models.CASCADE,null=True)
     emails = models.ManyToManyField("User",related_name="user_emails",null=True)
     roles = models.ManyToManyField("Roles",related_name="users_role")
+    image = models.ImageField('thumbnail',upload_to='images/profiles',null=True,blank=True)
     
     
     USERNAME_FIELD = "email"

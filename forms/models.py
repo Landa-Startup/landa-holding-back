@@ -1,9 +1,5 @@
 from django.db import models
-from accounts.models import User
-from django.dispatch import receiver
-from django.core.mail import send_mail
-from django.db.models.signals import post_save,pre_save
-from uuid import uuid4
+
 
 # Create your models here.
 
@@ -97,29 +93,7 @@ class ApplyJob(models.Model):
   createdAt=models.DateTimeField(auto_now_add=True)
   updatedAt=models.DateTimeField(auto_now=True)
   
-class Vacation(models.Model):
-  user = models.ForeignKey(User,on_delete=models.CASCADE)
-  start_time = models.DateTimeField()
-  end_time = models.DateTimeField()
-  STATUS = ((1,'Pending'),(2,'Approved'),(3,'Decline'))
-  status = models.IntegerField(choices=STATUS,default=1)
-  uuid = models.UUIDField(default=uuid4, editable=False, unique=True)
-  created_at = models.DateTimeField(auto_now_add=True)
-  updated_at = models.DateTimeField(auto_now=True)
-  
-  class Meta:
-        permissions = [
-          ("can_create_mymodel", "Can create mymodel"),
-          ("can_view_mymodel", "Can view mymodel"),
-          ("can_edit_mymodel", "Can edit mymodel"),
-          ("can_delete_mymodel", "Can delete mymodel"),
-        ]
-  
-  
-  
-  def __str__(self):
-    user = User.objects.get(id=self.user_id) 
-    return user.first_name + " " + user.last_name
+
 
 
 

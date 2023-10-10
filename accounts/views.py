@@ -2,22 +2,10 @@ from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
-from django.contrib.auth.models import User
 from rest_framework import status
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticated
-
-
-class HelloView(APIView):
-    permission_classes = (IsAuthenticated,)
-
-    def get(self, request):
-        content = {'message': 'Hello, World!'}
-        return Response(content)
-
-
 from rest_framework_simplejwt.tokens import Token
 
 class CustomPayload(Token):
@@ -28,6 +16,19 @@ class CustomPayload(Token):
     def role(self):
         # Replace this with logic to get the user's role
         return self['roles']
+    @property
+    def first_name(self):
+        # Replace this with logic to get the user's role
+        return self['first_name']
+    @property
+    def last_name(self):
+        # Replace this with logic to get the user's role
+        return self['last_name']
+    @property
+    def image(self):
+        # Replace this with logic to get the user's role
+        return self['image']
+    
     
 
 class GenerateTokenView(APIView):

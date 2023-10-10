@@ -52,9 +52,11 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'rest_framework_simplejwt',    
+    # 'whitenoise.runserver_nostatic',
     'forms',
     'accounts',
-    'blog'
+    'blog',
+    'panel'
 ]
 
 MIDDLEWARE = [
@@ -80,7 +82,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -178,6 +180,7 @@ AUTH_USER_MODEL = "accounts.User"
 
 
 STATIC_URL = 'static/'
+# STATICFILES_STORAGE="whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -199,19 +202,6 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     )
-}
-
-
-# JWT settings
-JWT_AUTH = {
-    # Set token expiration time.
-    'JWT_EXPIRATION_DELTA': datetime.timedelta(hours=1),
-    'JWT_ALLOW_REFRESH': True,
-    # Set token refresh time.
-    'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=7),
-    'JWT_PAYLOAD_HANDLER':
-    # Replace 'your_app' with your app's name
-    'accounts.jwt_payload_handler.jwt_payload_handler',
 }
 
 

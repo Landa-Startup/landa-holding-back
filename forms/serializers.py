@@ -1,6 +1,5 @@
 from .models import StartUpsForm,ContactUs,PartnerMembership,InvestorRegistration,Entrepreuneur,ApplyJob
 from rest_framework import serializers
-
 class StartupFormSerializer(serializers.ModelSerializer):
     financialModelFile = serializers.FileField(required=False)
     financialFile = serializers.FileField(required=False)
@@ -40,3 +39,5 @@ class ApplyJobSerializer(serializers.ModelSerializer):
         model= ApplyJob
         fields = '__all__'
         read_only_fields = ['id','createdAt']
+
+
