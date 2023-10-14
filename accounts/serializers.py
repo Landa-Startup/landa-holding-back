@@ -37,7 +37,10 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         token['role'] = user.roles.first().role
         token['first_name'] = user.first_name
         token['last_name'] = user.last_name
-        token['image'] = user.image
+        if user.image:
+            token['image'] = user.image.url
+        else:
+            token['image'] = ""
         
         # ...
 

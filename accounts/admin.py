@@ -10,7 +10,7 @@ class UserAdmin(UserAdmin):
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
         (('Personal info'), {'fields': ('first_name', 'last_name', 'phone_number', 'id_number', 'code')}),
-        (('Permissions'), {'fields': ('is_active', 'is_staff', 'roles', 'employer', 'emails','groups')}),
+        (('Permissions'), {'fields': ('is_active', 'is_staff', 'roles', 'employer', 'emails','groups','image')}),
         (('Important dates'), {'fields': ('last_login', 'date_joined')}),
     )
 
