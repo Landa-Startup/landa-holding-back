@@ -30,16 +30,24 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_USE_SSL = False
-EMAIL_HOST_USER = 'merajbighamian@gmail.com'     # Your SMTP username
-EMAIL_HOST_PASSWORD = "pbronjlmwuuzcmjr" # Your SMTP password
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# EMAIL_USE_SSL = False
+# EMAIL_HOST_USER = 'merajbighamian@gmail.com'   
+# EMAIL_HOST_PASSWORD = "pbronjlmwuuzcmjr"
 # DEFAULT_FROM_EMAIL = 'merajbighamian@gmail.com'
 
-
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'sv.landaholding.com'
+EMAIL_PORT = 587
+EMAIL_USE_SSL = False
+EMAIL_USE_TLS = True
+# EMAIL_USE_SSL = False
+EMAIL_HOST_USER = 'info@landaholding.com'     # Your SMTP username
+EMAIL_HOST_PASSWORD = "k&@kSfv}VvXy" # Your SMTP password
+DEFAULT_FROM_EMAIL = 'info@landaholding.com'
 # Application definition
 
 INSTALLED_APPS = [
