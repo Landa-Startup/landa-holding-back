@@ -22,7 +22,7 @@ def send_vacation_email(sender, instance, created, **kwargs):
         email_content = email_content.replace('{{start_time}}',str(instance.start_time))
         email_content = email_content.replace('{{end_time}}',str(instance.end_time))
         subject = f"New Vacation Request From {user.first_name} {user.last_name}"
-        from_email = "merajbighamian@gmail.com"  # Replace with your email address
+        from_email = "info@landaholding.com"  # Replace with your email address
         employer_list = [user.employer.email]  # Replace with the recipient's email address
 
 
@@ -44,7 +44,7 @@ def update_description(sender, instance, **kwargs):
       email_me = user.email
       
       employer_list = [user.employer.email] 
-      from_email = "merajbighamian@gmail.com"  # Replace with your email address
+      from_email = "info@landaholding.com"  # Replace with your email address
       emails_users = user.emails.all()
       
       status_message =""
@@ -52,7 +52,6 @@ def update_description(sender, instance, **kwargs):
         status_message = 'Approve'
       elif instance.status == 3:
         status_message = 'Decline'
-      
       if instance.status != 1:
         if instance.status == 2:
           for email_user in emails_users: 
