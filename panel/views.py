@@ -67,7 +67,7 @@ class VacationViewStaffForm(APIView):
         get_all_objects = Vacation.objects.all()
         queryset = get_all_objects.filter(user_id__employer=request.user.id).exclude(user_id=request.user.id)
         serializer = VacationSerializers(queryset, many=True)
-        return response(serializer.data)
+        return Response(serializer.data)
 
 
 def approve(request,uuid_value):
