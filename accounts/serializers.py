@@ -3,10 +3,16 @@ from .models import User
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 
-class UserSerializer(serializers.ModelSerializer):
+class EmployerSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'email','first_name','last_name','code','id_number','phone_number','roles']
+        fields = ['id', 'email','first_name','last_name','code','id_number','phone_number','roles','employer_id']
+
+class UserSerializer(serializers.ModelSerializer):
+    employer = EmployerSerializer()
+    class Meta:
+        model = User
+        fields = ['id', 'email','first_name','last_name','code','id_number','phone_number','roles','employer']
 
 class RegisterSerializer(serializers.ModelSerializer):
     class Meta:

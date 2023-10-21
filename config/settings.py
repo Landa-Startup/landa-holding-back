@@ -56,7 +56,8 @@ INSTALLED_APPS = [
     'forms',
     'accounts',
     'blog',
-    'panel'
+    'panel',
+    'ckeditor',
 ]
 
 MIDDLEWARE = [
@@ -214,3 +215,16 @@ SIMPLE_JWT = {
   # ...
 }
 
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'Custom',
+        'toolbar_Custom': [
+            ['Bold', 'Italic', 'Underline'],
+            ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
+            ['Link', 'Unlink'],
+            ['RemoveFormat', 'Source'],
+        ],
+        'width': 900,
+        'height': 200,
+    }
+}
