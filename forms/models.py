@@ -69,7 +69,7 @@ class InvestorRegistration(models.Model):
   countryOfResidence=models.CharField(max_length=500, blank=True)
   provinceOfResidence=models.CharField(max_length=500, blank=True)
   companyName=models.CharField(max_length=500, blank=True)
-  interestes=models.CharField(max_length=500, blank=True)
+  interests=models.CharField(max_length=500, blank=True)
   preferredAreas=models.CharField(max_length=500, blank=True)
   howDidYouKnowUs=models.CharField(max_length=500, blank=True)
   createdAt=models.DateTimeField(auto_now_add=True)
