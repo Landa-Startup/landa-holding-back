@@ -15,6 +15,8 @@ class Vacation(models.Model):
     uuid = models.UUIDField(default=uuid4, editable=False, unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    VACATION_TYPE= ((1, 'illness'), (2, 'entitlement'))
+    vacation_status = models.IntegerField(choices=VACATION_TYPE, default=1)
 
     class Meta:
         permissions = [
@@ -23,8 +25,8 @@ class Vacation(models.Model):
             ("can_edit_vacation", "Can edit vacation"),
             ("can_delete_vacation", "Can delete vacation"),
             ("can_get_all_vacation", "Can Get All vacation"),
-
         ]
+        ordering = ('-created_at',)
 
     def __str__(self):
         user = User.objects.get(id=self.user_id)

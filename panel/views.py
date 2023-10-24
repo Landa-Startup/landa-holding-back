@@ -2,7 +2,7 @@ from urllib import response
 import uuid
 from django.http import HttpResponse,Http404
 from django.shortcuts import render
-from .serializers import VacationGetAllFormSerializer,VacationSerializers
+from .serializers import VacationGetAllFormSerializer,VacationSerializers,CreateVacationSerializers
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.generics import CreateAPIView,DestroyAPIView
@@ -26,7 +26,7 @@ class VacationCreateForm(CreateAPIView):
     permission_classes=[CanCreateVacation,IsAuthenticated]
     queryset = Vacation.objects.all()# Query your model for data
     http_method_names = ['post']
-    serializer_class = VacationSerializers  # Serialize the data
+    serializer_class = CreateVacationSerializers  # Serialize the data
 
 class VacationEditForm(APIView ):
     serializer_class = VacationSerializers

@@ -17,3 +17,8 @@ class VacationSerializers(serializers.ModelSerializer):
     class Meta:
         model = Vacation
         fields = '__all__'
+    
+class CreateVacationSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = Vacation
+        fields = '__all__'
