@@ -61,6 +61,7 @@ def update_description(sender, instance, **kwargs):
               subject = f"New Vacation Request From {user.first_name} {user.last_name}"
               email = email_user.email
               send_mail(subject, f"{user.first_name} {user.last_name} vacation form is {status_message}", from_email, [email])
-        elif instance.status ==2 or instance.status ==3:
+          send_mail(f"Your Vacation Request Has Been {status_message}", f"Your Vacation Request is {status_message}", from_email, [email_me])
+        elif instance.status ==3:
           send_mail(f"Your Vacation Request Has Been {status_message}", f"Your Vacation Request is {status_message}", from_email, [email_me])
         
