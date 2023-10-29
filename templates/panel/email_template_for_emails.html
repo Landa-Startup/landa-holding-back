@@ -63,16 +63,17 @@
         <th>User Name</th>
         <th>Start Time</th>
         <th>End Time</th>
+        <th>Status</th>
       </tr>
       <tr>
         <td>{{ recipient_name }}</td>
         <td>{{start_time}}</td>
         <td>{{end_time}}</td>
+        <td>{{status}}</td>
       </tr>
     </table>
     <br>
-    <a href="http://127.0.0.1:80000/panel/approve/{{uuid}}"><button class="stylish-button">Approved</button></a>
-    <a href="http://127.0.0.1:8000/panel/decline/{{uuid}}"><button class="stylish-button">Declined</button></a>
+
 
   </body>
 </html>
