@@ -89,7 +89,7 @@ class ApplyJob(models.Model):
   lastName=models.CharField(max_length=500)
   email=models.EmailField()
   phoneNumber=models.CharField(max_length=250,blank=True)
-  cvFile=models.FileField(upload_to='cv-files',editable=True)
+  cvFile=models.FileField(upload_to='cv-files',editable=True,null=True,blank=True)
   createdAt=models.DateTimeField(auto_now_add=True)
   updatedAt=models.DateTimeField(auto_now=True)
   
