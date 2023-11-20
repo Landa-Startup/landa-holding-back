@@ -94,15 +94,16 @@ def update_description(sender, instance, **kwargs):
             if email_user.email == employer_list[0]:   
               pass  
             else:
-              subject = f"New Vacation Request From {user.first_name} {user.last_name}"
+              subject = f"Vacation Request of {user.first_name} {user.last_name} Has Been Approved"
               send_mail(
                 subject,
                 '',  # Leave the message argument empty since we have HTML content.
                 from_email,
-                employer_list,
+                [email_user.email],
                 fail_silently=False,
                 html_message=email_content,  # Specify the HTML content here.
               )
+              
           send_mail(f"Your Vacation Request Has Been {status_message}", f"Your Vacation Request is {status_message}", from_email, [email_me])
         elif instance.status ==3:
           send_mail(f"Your Vacation Request Has Been {status_message}", f"Your Vacation Request is {status_message}", from_email, [email_me])

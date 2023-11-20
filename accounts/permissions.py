@@ -13,7 +13,7 @@ class CanCreateVacation(permissions.BasePermission):
 class CanEditVacation(permissions.BasePermission):
     edit_methods = ['PUT']
     def has_permission(self, request, view):
-        return request.user.has_perm('panel.can_delete_vacation')
+        return request.user.has_perm('panel.can_edit_vacation')
     
 class CanDeleteVacation(permissions.BasePermission):
     edit_methods = ['DELETE']

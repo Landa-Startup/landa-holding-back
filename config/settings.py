@@ -220,7 +220,7 @@ REST_FRAMEWORK = {
 SIMPLE_JWT = {
   # It will work instead of the default serializer(TokenObtainPairSerializer).
   "TOKEN_OBTAIN_SERIALIZER": "accounts.serializers.MyTokenObtainPairSerializer",
-  "ACCESS_TOKEN_LIFETIME": datetime.timedelta(minutes=120),
+  "ACCESS_TOKEN_LIFETIME": datetime.timedelta(minutes=1440),
   # ...
 }
 

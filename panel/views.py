@@ -28,7 +28,7 @@ class VacationCreateForm(CreateAPIView):
     http_method_names = ['post']
     serializer_class = CreateVacationSerializers  # Serialize the data
 
-class VacationEditForm(APIView ):
+class VacationEditForm(APIView):
     serializer_class = VacationSerializers
     
     def get_object(self, pk):
