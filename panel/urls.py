@@ -9,8 +9,6 @@ urlpatterns = [
     path('staff-vacation-form',VacationViewStaffForm.as_view(),name='staff-vacation-form'),
     path('create-vacation-form',VacationCreateForm.as_view(),name='create-vacation-form'), 
     path('delete-vacation-form/<int:pk>',VacationDeleteForm.as_view(),name='delete-vacation-form'), 
-    
-
     path('approve/<str:uuid_value>/',approve,name='approve'),
     path('decline/<str:uuid_value>/',decline,name='decline'),
 ]

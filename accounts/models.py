@@ -2,9 +2,7 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin,Group
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
-
 from .managers import UserManager
-
 
 class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(_("email address"), unique=True,max_length=300)
@@ -20,16 +18,12 @@ class User(AbstractBaseUser, PermissionsMixin):
     emails = models.ManyToManyField("User",related_name="user_emails",null=True)
     roles = models.ManyToManyField("Roles",related_name="users_role")
     image = models.ImageField('thumbnail',upload_to='images/profiles',null=True,blank=True)
-    
-    
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ['phone_number','code','id_number','first_name','last_name']
-
     objects = UserManager()
 
     def __str__(self):
         return self.first_name + " " + self.last_name
-
 
 class Roles(models.Model):
     role = models.CharField("role name",max_length=300)

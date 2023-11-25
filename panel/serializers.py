@@ -1,7 +1,6 @@
 
 from rest_framework import serializers
 from accounts.serializers import UserSerializer
-
 from panel.models import Vacation
 
 class VacationGetAllFormSerializer(serializers.ModelSerializer):

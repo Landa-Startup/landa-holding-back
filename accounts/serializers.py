@@ -26,14 +26,11 @@ class RegisterSerializer(serializers.ModelSerializer):
             first_name=validated_data['first_name'],
             last_name=validated_data['last_name'],
             code=validated_data['code'],
-            
         )
         user.set_password(validated_data['password'])
         user.save()
         return user
     
-
-
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
     def get_token(cls, user):
@@ -47,7 +44,5 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
             token['image'] = user.image.url
         else:
             token['image'] = ""
-        
-        # ...
-
+            
         return token

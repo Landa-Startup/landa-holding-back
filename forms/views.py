@@ -38,10 +38,6 @@ class ApplyJobView(CreateAPIView):
     serializer_class = ApplyJobSerializer
     http_method_names = ['post']
 
-
-
-
-
 # csrf token 
 class CSRFTokenView(APIView):
     def get(self, request, format=None):

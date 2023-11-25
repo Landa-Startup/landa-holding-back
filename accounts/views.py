@@ -11,7 +11,7 @@ from rest_framework_simplejwt.tokens import Token
 class CustomPayload(Token):
     def __init__(self, token):
         super().__init__(token)
-
+        
     @property
     def role(self):
         # Replace this with logic to get the user's role
@@ -29,8 +29,6 @@ class CustomPayload(Token):
         # Replace this with logic to get the user's role
         return self['image']
     
-    
-
 class GenerateTokenView(APIView):
     def post(self, request):
         user = request.user  # Replace this with your user object

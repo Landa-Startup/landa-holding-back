@@ -10,7 +10,6 @@ class TagSerializers(ModelSerializer):
     class Meta:
         model = Tag
         fields = ('title',)
-        
 
 class BlogPostDetailsSerializers(ModelSerializer):
     tags = TagSerializers(many=True,read_only=True)   

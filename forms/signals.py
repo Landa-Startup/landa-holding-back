@@ -8,7 +8,6 @@ from django.db.models.signals import post_save, pre_save
 # Import the Vacation model from your app's models
 from .models import StartUpsForm, ContactUs, PartnerMembership, InvestorRegistration, Entrepreuneur, ApplyJob
 
-
 @receiver(post_save, sender=StartUpsForm)
 @receiver(post_save, sender=ContactUs)
 @receiver(post_save, sender=Entrepreuneur)
