@@ -66,6 +66,8 @@ INSTALLED_APPS = [
     'blog',
     'panel',
     'ckeditor',
+    'event',        
+    
 ]
 
 MIDDLEWARE = [
