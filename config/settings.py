@@ -35,9 +35,9 @@ ALLOWED_HOSTS = ["*"]
 # EMAIL_PORT = 587
 # EMAIL_USE_TLS = True
 # EMAIL_USE_SSL = False
-# EMAIL_HOST_USER = 'merajbighamian@gmail.com'   
-# EMAIL_HOST_PASSWORD = "pbronjlmwuuzcmjr"
-# DEFAULT_FROM_EMAIL = 'merajbighamian@gmail.com'
+# EMAIL_HOST_USER = 'pzamaninejad.net@gmail.com'   
+# EMAIL_HOST_PASSWORD = "geuxklxuqmqostpx"
+# DEFAULT_FROM_EMAIL = 'pzamaninejad.net@gmail.com'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'sv.landaholding.com'

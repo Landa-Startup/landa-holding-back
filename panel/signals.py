@@ -4,6 +4,8 @@ import datetime
 from django.dispatch import receiver
 from django.core.mail import send_mail
 from django.conf import settings
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 from django.db.models.signals import post_save, pre_save
 from .models import Vacation  # Import the Vacation model from your app's models
 from accounts.models import User
@@ -41,20 +43,23 @@ def send_vacation_email(sender, instance, created, **kwargs):
         # Define the email subject and message
         user = User.objects.get(id=instance.user_id)
 
-        # Load the HTML template
-        email_template = ''
+
         template_path = os.path.join(
             settings.BASE_DIR, 'templates', 'panel', 'email_template.html')
-        with open(template_path, 'r') as template_file:
-            email_template = template_file.read()
-        # Replace placeholders in the HTML template
-        email_content = email_template.replace(
-            '{{ recipient_name }}', (user.first_name.capitalize() + ' '+user.last_name.capitalize()), -2)
-        email_content = email_content.replace('{{uuid}}', str(instance.uuid))
-        email_content = email_content.replace(
-            '{{start_time}}', str(gregorian_to_jalali(instance.start_time)))
-        email_content = email_content.replace(
-            '{{end_time}}', str(gregorian_to_jalali(instance.end_time)))
+        
+        # Sending context for email template
+        context = {
+            "recipient_name": (user.first_name.capitalize() + ' '+user.last_name.capitalize()),
+            "start_time": str(gregorian_to_jalali(instance.start_time)),
+            "end_time": str(gregorian_to_jalali(instance.end_time)),
+        }
+        
+        # Render the email template with the provided context
+        email_content = render_to_string(template_path, context)
+        
+        # Create a plain text version of the email content (strip HTML tags)
+        plain_message = strip_tags(email_content)
+
         subject = f"New Vacation Request From {user.first_name} {user.last_name}"
         from_email = "info@landaholding.com"  # Replace with your email address
         # Replace with the recipient's email address
@@ -62,10 +67,9 @@ def send_vacation_email(sender, instance, created, **kwargs):
 
         send_mail(
             subject,
-            '',  # Leave the message argument empty since we have HTML content.
+            plain_message,
             from_email,
             employer_list,
-            fail_silently=False,
             html_message=email_content,  # Specify the HTML content here.
         )
 
