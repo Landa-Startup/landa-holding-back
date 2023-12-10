@@ -89,20 +89,28 @@ def update_description(sender, instance, **kwargs):
         status_message = 'Pending'
 
     # Load the HTML template
-    email_template = ''
+    # email_template = ''
     template_path = os.path.join(
         settings.BASE_DIR, 'templates', 'panel', 'email_template_for_emails.html')
-    with open(template_path, 'r') as template_file:
-        email_template = template_file.read()
+    # with open(template_path, 'r') as template_file:
+    #     email_template = template_file.read()
     # Replace placeholders in the HTML template
-
-    email_content = email_template.replace(
-        '{{ recipient_name }}', (user.first_name.capitalize() + ' '+user.last_name.capitalize()), -2)
-    email_content = email_content.replace('{{start_time}}', convert_gmt_to_theran_timezone(
-        str(gregorian_to_jalali(instance.start_time))))
-    email_content = email_content.replace('{{end_time}}', convert_gmt_to_theran_timezone(
-        str(gregorian_to_jalali(instance.end_time))))
-    email_content = email_content.replace('{{status}}', status_message)
+    context = {
+        "recipient_name":user.first_name.capitalize() + ' '+user.last_name.capitalize(),
+        "start_time":convert_gmt_to_theran_timezone(str(gregorian_to_jalali(instance.start_time))),
+        "end_time":convert_gmt_to_theran_timezone(str(gregorian_to_jalali(instance.end_time))),
+        "status":status_message
+    }
+    
+    email_content = render_to_string(template_path, context)
+    plain_message = strip_tags(email_content)
+    # email_content = email_template.replace(
+    #     '{{ recipient_name }}', (user.first_name.capitalize() + ' '+user.last_name.capitalize()), -2)
+    # email_content = email_content.replace('{{start_time}}', convert_gmt_to_theran_timezone(
+    #     str(gregorian_to_jalali(instance.start_time))))
+    # email_content = email_content.replace('{{end_time}}', convert_gmt_to_theran_timezone(
+    #     str(gregorian_to_jalali(instance.end_time))))
+    # email_content = email_content.replace('{{status}}', status_message)
 
     email_me = user.email
 
@@ -120,7 +128,7 @@ def update_description(sender, instance, **kwargs):
                     send_mail(
                         subject,
                         # Leave the message argument empty since we have HTML content.
-                        '',
+                        plain_message,
                         from_email,
                         [email_user.email],
                         fail_silently=False,
