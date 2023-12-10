@@ -27,8 +27,6 @@ class EventDetailsSerializers(ModelSerializer):
         extra_kwargs = {
             'url': {'lookup_field': 'slug'},
         }
-    speakers = UserSerializer(many=True,read_only=True)
-    images = ImageSerilizers(many=True,read_only=True,source='event_images')
 
 class EventFormSerializers(ModelSerializer):
     class Meta:
