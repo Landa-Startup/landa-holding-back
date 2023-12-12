@@ -59,12 +59,10 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'whitenoise.runserver_nostatic',
-    'forms',
     'accounts',
     'blog',
     'ckeditor',
     'event',
-
 ]
 
 MIDDLEWARE = [
@@ -213,6 +211,7 @@ SIMPLE_JWT = {
     "TOKEN_OBTAIN_SERIALIZER": "accounts.serializers.MyTokenObtainPairSerializer",
     "ACCESS_TOKEN_LIFETIME": datetime.timedelta(minutes=1440),
 }
+
 
 CKEDITOR_CONFIGS = {
     'default': {

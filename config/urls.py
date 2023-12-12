@@ -22,7 +22,6 @@ from django.urls import path,include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
-    path('',include('forms.urls')),
     path('accounts/',include('accounts.urls')),
     path('blog/',include('blog.urls')),
     path('event/',include('event.urls',namespace='event')),
