@@ -61,13 +61,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',    
     'whitenoise.runserver_nostatic',
-    'forms',
     'accounts',
-    'blog',
     'panel',
-    'ckeditor',
-    'event',        
-    
 ]
 
 MIDDLEWARE = [
@@ -222,18 +217,4 @@ REST_FRAMEWORK = {
 SIMPLE_JWT = {
   "TOKEN_OBTAIN_SERIALIZER": "accounts.serializers.MyTokenObtainPairSerializer",
   "ACCESS_TOKEN_LIFETIME": datetime.timedelta(minutes=1440),
-}
-
-CKEDITOR_CONFIGS = {
-    'default': {
-        'toolbar': 'Custom',
-        'toolbar_Custom': [
-            ['Bold', 'Italic', 'Underline','Styles', 'Format', 'Font', 'FontSize','ImageButton','Image'],
-            ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
-            ['Link', 'Unlink'],
-            ['RemoveFormat', 'Source'],
-        ],
-        'width': 900,
-        'height': 200,
-    }
 }

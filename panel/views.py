@@ -9,7 +9,9 @@ from rest_framework.generics import CreateAPIView, DestroyAPIView
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 from .models import Vacation
-from accounts.permissions import CanViewVacation, CanCreateVacation, CanGetAllVacation, CanEditVacation, CanDeleteVacation
+from accounts.permissions import CanViewVacation, CanCreateVacation, CanGetAllVacation, CanEditVacation, \
+    CanDeleteVacation
+
 
 # Create your views here.
 

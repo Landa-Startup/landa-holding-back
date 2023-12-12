@@ -10,6 +10,7 @@ from django.db.models.signals import post_save, pre_save
 from .models import Vacation  # Import the Vacation model from your app's models
 from accounts.models import User
 
+
 # IMPORTANT
 
 
@@ -23,8 +24,10 @@ def gregorian_to_jalali(gregorian_datetime_string: str):
         gregorian_datetime_string)
 
     # Convert the Gregorian datetime to Jalali
-    jalali_datetime = jdatetime.datetime.fromgregorian(day=gregorian_datetime.day, month=gregorian_datetime.month, year=gregorian_datetime.year,
-                                                    hour=gregorian_datetime.hour, minute=gregorian_datetime.minute, second=gregorian_datetime.second)
+    jalali_datetime = jdatetime.datetime.fromgregorian(day=gregorian_datetime.day, month=gregorian_datetime.month,
+                                                       year=gregorian_datetime.year,
+                                                       hour=gregorian_datetime.hour, minute=gregorian_datetime.minute,
+                                                       second=gregorian_datetime.second)
 
     return jalali_datetime
 
@@ -43,20 +46,19 @@ def send_vacation_email(sender, instance, created, **kwargs):
         # Define the email subject and message
         user = User.objects.get(id=instance.user_id)
 
-
         template_path = os.path.join(
             settings.BASE_DIR, 'templates', 'panel', 'email_template.html')
-        
+
         # Sending context for email template
         context = {
-            "recipient_name": (user.first_name.capitalize() + ' '+user.last_name.capitalize()),
+            "recipient_name": (user.first_name.capitalize() + ' ' + user.last_name.capitalize()),
             "start_time": str(gregorian_to_jalali(instance.start_time)),
             "end_time": str(gregorian_to_jalali(instance.end_time)),
         }
-        
+
         # Render the email template with the provided context
         email_content = render_to_string(template_path, context)
-        
+
         # Create a plain text version of the email content (strip HTML tags)
         plain_message = strip_tags(email_content)
 
@@ -96,12 +98,12 @@ def update_description(sender, instance, **kwargs):
     #     email_template = template_file.read()
     # Replace placeholders in the HTML template
     context = {
-        "recipient_name":user.first_name.capitalize() + ' '+user.last_name.capitalize(),
-        "start_time":convert_gmt_to_theran_timezone(str(gregorian_to_jalali(instance.start_time))),
-        "end_time":convert_gmt_to_theran_timezone(str(gregorian_to_jalali(instance.end_time))),
-        "status":status_message
+        "recipient_name": user.first_name.capitalize() + ' ' + user.last_name.capitalize(),
+        "start_time": convert_gmt_to_theran_timezone(str(gregorian_to_jalali(instance.start_time))),
+        "end_time": convert_gmt_to_theran_timezone(str(gregorian_to_jalali(instance.end_time))),
+        "status": status_message
     }
-    
+
     email_content = render_to_string(template_path, context)
     plain_message = strip_tags(email_content)
     # email_content = email_template.replace(
@@ -137,7 +139,7 @@ def update_description(sender, instance, **kwargs):
                     )
 
             send_mail(f"Your Vacation Request Has Been {status_message}",
-                    f"Your Vacation Request is {status_message}", from_email, [email_me])
+                      f"Your Vacation Request is {status_message}", from_email, [email_me])
         elif instance.status == 3:
             send_mail(f"Your Vacation Request Has Been {status_message}",
-                    f"Your Vacation Request is {status_message}", from_email, [email_me])
+                      f"Your Vacation Request is {status_message}", from_email, [email_me])
