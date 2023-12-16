@@ -53,7 +53,6 @@ def send_vacation_email(sender, instance, created, **kwargs):
             "start_time": str(gregorian_to_jalali(instance.start_time)),
             "end_time": str(gregorian_to_jalali(instance.end_time)),
         }
-        
         # Render the email template with the provided context
         email_content = render_to_string(template_path, context)
         
@@ -104,6 +103,7 @@ def update_description(sender, instance, **kwargs):
     
     email_content = render_to_string(template_path, context)
     plain_message = strip_tags(email_content)
+    # TODO: delete below codes
     # email_content = email_template.replace(
     #     '{{ recipient_name }}', (user.first_name.capitalize() + ' '+user.last_name.capitalize()), -2)
     # email_content = email_content.replace('{{start_time}}', convert_gmt_to_theran_timezone(
