@@ -25,7 +25,6 @@ urlpatterns = [
     path('',include('forms.urls')),
     path('accounts/',include('accounts.urls')),
     path('blog/',include('blog.urls')),
-    path('panel/',include('panel.urls',namespace='panel')),
     path('event/',include('event.urls',namespace='event')),
 ]
 
