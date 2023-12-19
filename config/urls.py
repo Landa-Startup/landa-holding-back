@@ -26,6 +26,8 @@ urlpatterns = [
     path('accounts/',include('accounts.urls')),
     path('blog/',include('blog.urls')),
     path('event/',include('event.urls',namespace='event')),
+    path('user/',include('user_profile.urls',namespace='user_profile')),
+    
 ]
 
 if settings.DEBUG:

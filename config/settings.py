@@ -28,15 +28,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST = 'smtp.gmail.com'
-# EMAIL_PORT = 587
-# EMAIL_USE_TLS = True
-# EMAIL_USE_SSL = False
-# EMAIL_HOST_USER = 'pzamaninejad.net@gmail.com'   
-# EMAIL_HOST_PASSWORD = "geuxklxuqmqostpx"
-# DEFAULT_FROM_EMAIL = 'pzamaninejad.net@gmail.com'
-
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'sv.landaholding.com'
 EMAIL_PORT = 587
@@ -64,6 +55,9 @@ INSTALLED_APPS = [
     'blog',
     'ckeditor',
     'event',
+    'user_profile',
+    'qrcode_generator',
+
 
 ]
 
