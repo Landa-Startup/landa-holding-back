@@ -109,5 +109,5 @@ class LandaGene(models.Model):
     full_name = models.CharField(max_length=500)
     email = models.EmailField()
     phone_number = models.CharField(max_length=250, blank=True)
-    company_name = models.CharField(max_length=500)
+    company_name = models.CharField(max_length=500, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
