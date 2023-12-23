@@ -15,6 +15,7 @@ class Profile(models.Model):
     websites = models.ManyToManyField('Website',blank=True)
     thumbnail = models.ImageField("عکس پروفایل",upload_to="profile/images",null=True,blank=True)
     qrcode_image = models.ImageField(upload_to='qrcodes/',default='',blank=True)
+    job_title = models.CharField('عنوان شغلی', max_length=250, default='')
     
     def __str__(self) -> str:
         return self.username

@@ -16,7 +16,10 @@ jdatetime==4.1.1
 Pillow==10.0.1
 pycparser==2.21
 PyJWT==1.7.1
+pypng==0.20220715.0
 pytz==2023.3
+qrcode==7.4.2
 sqlparse==0.4.4
+typing_extensions==4.9.0
 tzdata==2023.3
 whitenoise==6.5.0
