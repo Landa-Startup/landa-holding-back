@@ -4,7 +4,7 @@ from django.db import models
 
 class Profile(models.Model):
     username = models.SlugField("نام کاربری", max_length=150, unique=True, null=False, blank=False)
-    first_name  = models.CharField("نام",  max_length=150)
+    first_name = models.CharField("نام",  max_length=150)
     last_name = models.CharField("نام خانوادگی",  max_length=150)
     phone_number = models.CharField("شماره تماس", max_length=11)
     email = models.EmailField("ایمیل", max_length=250)
