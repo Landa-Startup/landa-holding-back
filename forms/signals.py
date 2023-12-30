@@ -4,9 +4,10 @@ from datetime import datetime
 from django.dispatch import receiver
 from django.core.mail import send_mail
 from django.conf import settings
-from django.db.models.signals import post_save, pre_save
+from django.db.models.signals import post_save
+from ippanel import Client
 # Import the Vacation model from your app's models
-from .models import StartUpsForm, ContactUs, PartnerMembership, InvestorRegistration, Entrepreuneur, ApplyJob
+from .models import StartUpsForm, ContactUs, PartnerMembership, InvestorRegistration, Entrepreuneur, ApplyJob, LandaGene
 
 @receiver(post_save, sender=StartUpsForm)
 @receiver(post_save, sender=ContactUs)
@@ -16,6 +17,7 @@ from .models import StartUpsForm, ContactUs, PartnerMembership, InvestorRegistra
 @receiver(post_save, sender=ApplyJob)
 def send_create_form_email(sender, instance, created, **kwargs):
     if created:
+        # send email
         # Define the email subject and message
         user_email = instance.email
         user_list_email = [user_email]
@@ -42,57 +44,70 @@ Gratitude for your astute selection Our primary objective at Landa International
             # html_message=email_content,  # Specify the HTML content here.
         )
 
-# # a reciver for update model signal
-# @receiver(pre_save, sender=Vacation)
-# def update_description(sender, instance, **kwargs):
-#     # Here, you can define the logic to update the 'description' field.
-#     # For example, you can set it to a modified version of 'name'.
-#       user = User.objects.get(id=instance.user_id)
-#               # Define the email subject and message
 
-#       #check status
-#       status_message =""
-#       if instance.status == 2:
-#         status_message = 'Approved'
-#       elif instance.status == 3:
-#         status_message = 'Declined'
-#       elif instance.status == 1:
-#         status_message = 'Pending'
+key = "zYkFTImZ4E1uLfEh4jF1KvqNbsesulNgIemi_nOzRTI="
+sms = Client(key)
+message = "Greetings and welcome to the Landa family Gratitude for your astute selection Our primary objective at Landa International Holding is to deliver optimal services and ensure your satisfaction."
+fnumber = "+983000505"
 
-#       # Load the HTML template
-#       email_template = ''
-#       template_path = os.path.join(settings.BASE_DIR, 'templates', 'panel', 'email_template_for_emails.html')
-#       with open(template_path, 'r') as template_file:
-#           email_template = template_file.read()
-#       # Replace placeholders in the HTML template
-#       email_content = email_template.replace('{{ recipient_name }}', (user.first_name.capitalize() +' '+user.last_name.capitalize()),-2)
-#       # email_content = email_template.replace('{{ user_name }}', (user.first_name.capitalize() +' '+user.last_name.capitalize()))
-#       email_content = email_content.replace('{{start_time}}',str(gregorian_to_jalali(instance.start_time)))
-#       email_content = email_content.replace('{{end_time}}',str(gregorian_to_jalali(instance.end_time)))
-#       email_content = email_content.replace('{{status}}',status_message)
+@receiver(post_save,sender=ContactUs)
+def send_create_form_email(sender, instance, created, **kwargs):
+    if created:
+        #send sms
+        phone = instance.number.replace('0','+98',1)
+        pattern_values = {
+            "name": f"{instance.name}",
+        }
 
-#       email_me = user.email
+        message_id = sms.send_pattern(
+            "4x101dyk22ovhs9",    # pattern code
+            fnumber,      # originator
+            phone,  # recipient
+            pattern_values,  # pattern values
+        )
+    
+@receiver(post_save,sender=Entrepreuneur)
+def send_create_form_email(sender, instance, created, **kwargs):
+    if created:
+        #send sms
+        phone = instance.phone.replace('0','+98',1)
+        pattern_values = {
+            "name": f"{instance.companyName}",
+        }
 
-#       employer_list = [user.employer.email]
-#       from_email = "info@landaholding.com"  # Replace with your email address
-#       emails_users = user.emails.all()
+        message_id = sms.send_pattern(
+            "4x101dyk22ovhs9",    # pattern code
+            fnumber,      # originator
+            phone,  # recipient
+            pattern_values,  # pattern values
+        )    
+@receiver(post_save,sender=ApplyJob)
+def send_create_form_email(sender, instance, created, **kwargs):
+    if created:
+        #send sms
+        phone = instance.phoneNumber.replace('0','+98',1)
+        pattern_values = {
+            "name": f"{instance.firstName} {instance.lastName}",
+        }
 
+        message_id = sms.send_pattern(
+            "4x101dyk22ovhs9",    # pattern code
+            fnumber,      # originator
+            phone,  # recipient
+            pattern_values,  # pattern values
+        )
+@receiver(post_save,sender=LandaGene)
+def send_create_form_email(sender, instance, created, **kwargs):
+    if created:
+        #send sms
+        phone = instance.phone_number.replace('0','+98',1)
+        pattern_values = {
+            "name": f"{instance.full_name}",
+        }
 
-#       if instance.status != 1:
-#         if instance.status == 2:
-#           for email_user in emails_users:
-#             if email_user.email == employer_list[0]:
-#               pass
-#             else:
-#               subject = f"New Vacation Request From {user.first_name} {user.last_name}"
-#               send_mail(
-#                 subject,
-#                 '',  # Leave the message argument empty since we have HTML content.
-#                 from_email,
-#                 employer_list,
-#                 fail_silently=False,
-#                 html_message=email_content,  # Specify the HTML content here.
-#               )
-#           send_mail(f"Your Vacation Request Has Been {status_message}", f"Your Vacation Request is {status_message}", from_email, [email_me])
-#         elif instance.status ==3:
-#           send_mail(f"Your Vacation Request Has Been {status_message}", f"Your Vacation Request is {status_message}", from_email, [email_me])
+        message_id = sms.send_pattern(
+            "4x101dyk22ovhs9",    # pattern code
+            fnumber,      # originator
+            phone,  # recipient
+            pattern_values,  # pattern values
+        )   

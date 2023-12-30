@@ -21,6 +21,7 @@ class Profile(models.Model):
         return self.username
 
 class Website(models.Model):
+    title = models.CharField('عنوان وبسایت',max_length=500,default='')
     url = models.URLField("لینک وبسایت", max_length=400, unique=True, null=False)
     logo = models.ImageField("لوگو وبسایت", upload_to="website/logo", null=True, blank=True)
 
