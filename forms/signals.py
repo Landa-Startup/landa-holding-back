@@ -6,7 +6,9 @@ from django.core.mail import send_mail
 from django.conf import settings
 from django.db.models.signals import post_save, pre_save
 # Import the Vacation model from your app's models
-from .models import StartUpsForm, ContactUs, PartnerMembership, InvestorRegistration, Entrepreuneur, ApplyJob
+from .models import StartUpsForm, ContactUs, PartnerMembership, InvestorRegistration, Entrepreuneur, ApplyJob, \
+    Handicraft, LandaGene
+
 
 @receiver(post_save, sender=StartUpsForm)
 @receiver(post_save, sender=ContactUs)
@@ -14,6 +16,8 @@ from .models import StartUpsForm, ContactUs, PartnerMembership, InvestorRegistra
 @receiver(post_save, sender=PartnerMembership)
 @receiver(post_save, sender=InvestorRegistration)
 @receiver(post_save, sender=ApplyJob)
+@receiver(post_save, sender=Handicraft)
+@receiver(post_save, sender=LandaGene)
 def send_create_form_email(sender, instance, created, **kwargs):
     if created:
         # Define the email subject and message
@@ -35,7 +39,7 @@ def send_create_form_email(sender, instance, created, **kwargs):
             "Greetings and welcome to the Landa family",
             """Greetings and welcome to the Landa family
 Gratitude for your astute selection Our primary objective at Landa International Holding is to deliver optimal services and ensure your satisfaction.
-""", 
+""",
             from_email,
             user_list_email,
             fail_silently=False,
