@@ -51,67 +51,53 @@ Gratitude for your astute selection Our primary objective at Landa International
 
 key = "zYkFTImZ4E1uLfEh4jF1KvqNbsesulNgIemi_nOzRTI="
 sms = Client(key)
-message = "Greetings and welcome to the Landa family Gratitude for your astute selection Our primary objective at Landa International Holding is to deliver optimal services and ensure your satisfaction."
-fnumber = "+983000505"
+# message = "به خانواده بزرگ هلدینگ لاندا خوش آمدید! ضمن قدردانی از حسن انتخاب شما در صورت تمایل با شماره 09120539563 با ما در ارتباط باشید"
+fnumber = "983000505"
 
 @receiver(post_save,sender=ContactUs)
 def send_create_form_email(sender, instance, created, **kwargs):
     if created:
         #send sms
-        phone = instance.number.replace('0','+98',1)
-        pattern_values = {
-            "name": f"{instance.name}",
-        }
+        phone = instance.number.replace('0','98',1)
 
         message_id = sms.send_pattern(
-            "4x101dyk22ovhs9",    # pattern code
-            fnumber,      # originator
-            phone,  # recipient
-            pattern_values,  # pattern values
+            pattern_code="otu9jfznbjgnsej",    # pattern code
+            sender=fnumber,# originator
+            recipient=phone,  # recipient
         )
     
 @receiver(post_save,sender=Entrepreuneur)
 def send_create_form_email(sender, instance, created, **kwargs):
     if created:
         #send sms
-        phone = instance.phone.replace('0','+98',1)
-        pattern_values = {
-            "name": f"{instance.companyName}",
-        }
+        phone = instance.phone.replace('0','98',1)
+
 
         message_id = sms.send_pattern(
-            "4x101dyk22ovhs9",    # pattern code
-            fnumber,      # originator
-            phone,  # recipient
-            pattern_values,  # pattern values
-        )    
+            pattern_code="otu9jfznbjgnsej",    # pattern code
+            sender=fnumber,# originator
+            recipient=phone,  # recipient
+        )  
 @receiver(post_save,sender=ApplyJob)
 def send_create_form_email(sender, instance, created, **kwargs):
     if created:
         #send sms
-        phone = instance.phoneNumber.replace('0','+98',1)
-        pattern_values = {
-            "name": f"{instance.firstName} {instance.lastName}",
-        }
+        phone = instance.phoneNumber.replace('0','98',1)
+
 
         message_id = sms.send_pattern(
-            "4x101dyk22ovhs9",    # pattern code
-            fnumber,      # originator
-            phone,  # recipient
-            pattern_values,  # pattern values
-        )
+            pattern_code="otu9jfznbjgnsej",    # pattern code
+            sender=fnumber,# originator
+            recipient=phone,  # recipient
+        )  
 @receiver(post_save,sender=LandaGene)
 def send_create_form_email(sender, instance, created, **kwargs):
     if created:
         #send sms
         phone = instance.phone_number.replace('0','+98',1)
-        pattern_values = {
-            "name": f"{instance.full_name}",
-        }
 
         message_id = sms.send_pattern(
-            "4x101dyk22ovhs9",    # pattern code
-            fnumber,      # originator
-            phone,  # recipient
-            pattern_values,  # pattern values
-        )   
+            pattern_code="otu9jfznbjgnsej",    # pattern code
+            sender=fnumber,# originator
+            recipient=phone,  # recipient
+        )  
