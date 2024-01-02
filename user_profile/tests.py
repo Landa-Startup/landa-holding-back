@@ -17,10 +17,6 @@ class ProfileTests(APITestCase):
 
     def test_get_profile(self):
         url = reverse('user_profile:user-profile-view', kwargs={'username': 'test-testi'})
-        response = self.client.get(url, format('json'))
+        response = self.client.get(url, format='json')
         self.assertEquals(response.status_code, HTTP_200_OK)
-
-    def test_contain_get_profile(self):
-        url = reverse('user_profile:user-profile-view', kwargs={'username': 'test-testi'})
-        respose = self.client.get(url, format('json'))
-        self.assertContains(respose, 'test first')
+        self.assertContains(response, 'test first')

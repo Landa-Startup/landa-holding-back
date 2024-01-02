@@ -59,12 +59,12 @@ class FormsTest(APITestCase):
         image = Image.new("RGB", (width, height), "white")
         draw = ImageDraw.Draw(image)
         draw.rectangle([50, 50, 250, 150], fill="red")
-        image.save("example.png")
+        image.save("apply_job.png")
 
-        file_content = open('example.png', 'rb').read()
-        file = SimpleUploadedFile('test_file.jpg', file_content, content_type='image/jpeg')
+        file_content = open('apply_job.png', 'rb').read()
+        file = SimpleUploadedFile('test_apply.jpg', file_content, content_type='image/jpeg')
 
-        os.remove('example.png')
+        os.remove('apply_job.png')
 
         data = {
             'firstName': 'test first',
@@ -77,8 +77,8 @@ class FormsTest(APITestCase):
         response = self.client.post(url, data=data, format='multipart')
         instance = ApplyJob.objects.first()
         self.assertEquals(response.status_code, status.HTTP_201_CREATED)
-        self.assertEquals(instance.cvFile.url, '/media/cv-files/test_file.jpg')
-        os.remove('test_file.jpg')
+        self.assertEquals(instance.cvFile.url, '/media/cv-files/test_apply.jpg')
+        os.remove('test_apply.jpg')
         self.assertEquals(instance.firstName, 'test first')
 
     def test_entrepreuneur_form(self):
