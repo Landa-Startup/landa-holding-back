@@ -12,7 +12,7 @@ class Profile(models.Model):
     whatsapp = models.URLField("واتساپ", unique=True, blank=True, null=True)
     instagram = models.URLField("اینستاگرام", unique=True, blank=True, null=True)
     telegram = models.URLField("تلگرام", unique=True, blank=True, null=True)
-    websites = models.ManyToManyField('Website',blank=True)
+    websites = models.ManyToManyField('Website',blank=True, verbose_name='سایت ها')
     thumbnail = models.ImageField("عکس پروفایل",upload_to="profile/images",null=True,blank=True)
     qrcode_image = models.ImageField(upload_to='qrcodes/',default='',blank=True)
     job_title = models.CharField('عنوان شغلی', max_length=250, default='')
