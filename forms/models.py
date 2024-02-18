@@ -124,4 +124,3 @@ class WorkWithUs(models.Model):
     cv_file = models.FileField(upload_to='workWithUs/cv_file', null=True, blank=True, editable=True)
     email = models.EmailField('ایمیل', blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
-
