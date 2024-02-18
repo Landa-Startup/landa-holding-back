@@ -4,10 +4,10 @@ from django.middleware.csrf import get_token
 from rest_framework.response import Response
 from rest_framework.parsers import FormParser, MultiPartParser
 from .models import StartUpsForm, ContactUs, PartnerMembership, InvestorRegistration, Entrepreuneur, ApplyJob, \
-    LandaGene, Handicraft
+    LandaGene, Handicraft, WorkWithUs
 from .serializers import StartupFormSerializer, ContactUsSerializer, PartnerMembershipSerializer, \
     InvestorRegistrationSerializer, EntrepreuneurSerializer, ApplyJobSerializer, LandaGeneSerializer, \
-    HandicraftSerializer
+    HandicraftSerializer, WorkWithUsSerializers
 
 
 # Create your views here.
@@ -60,6 +60,10 @@ class LandaGeneView(CreateAPIView):
     serializer_class = LandaGeneSerializer
     http_method_names = ['post']
 
+class WorkWithUsView(CreateAPIView):
+    queryset = WorkWithUs.objects.all()
+    serializer_class = WorkWithUsSerializers
+    http_method_names = ['post']
 
 # csrf token
 class CSRFTokenView(APIView):

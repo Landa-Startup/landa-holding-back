@@ -111,3 +111,16 @@ class LandaGene(models.Model):
     phone_number = models.CharField(max_length=250, blank=True)
     company_name = models.CharField(max_length=500, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
+
+
+class WorkWithUs(models.Model):
+    your_position = models.CharField(max_length=250)
+    type_of_contract = models.CharField(max_length=250)
+    your_first_name = models.CharField(max_length=250)
+    your_last_name = models.CharField(max_length=250)
+    phone_number = models.CharField(max_length=250)
+    your_field_of_study = models.CharField(max_length=250)
+    your_subfield = models.CharField(max_length=250)
+    your_national_id_number = models.CharField(max_length=250)
+    created_at = models.DateTimeField(auto_now_add=True)
+    

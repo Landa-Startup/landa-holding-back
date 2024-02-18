@@ -1,5 +1,5 @@
 from .models import StartUpsForm,ContactUs,PartnerMembership,InvestorRegistration,Entrepreuneur,ApplyJob ,\
-    Handicraft, LandaGene
+    Handicraft, LandaGene, WorkWithUs
 from rest_framework import serializers
 class StartupFormSerializer(serializers.ModelSerializer):
     financialModelFile = serializers.FileField(required=False)
@@ -51,5 +51,11 @@ class HandicraftSerializer(serializers.ModelSerializer):
 class LandaGeneSerializer(serializers.ModelSerializer):
     class Meta:
         model = LandaGene
+        fields = '__all__'
+        read_only_fields = ['id', 'created_at']
+
+class WorkWithUsSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = WorkWithUs
         fields = '__all__'
         read_only_fields = ['id', 'created_at']

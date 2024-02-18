@@ -8,7 +8,7 @@ from django.db.models.signals import post_save
 from ippanel import Client
 # Import the Vacation model from your app's models
 from .models import StartUpsForm, ContactUs, PartnerMembership, InvestorRegistration, Entrepreuneur, ApplyJob, \
-    Handicraft, LandaGene
+    Handicraft, LandaGene, WorkWithUs
 
 
 @receiver(post_save, sender=StartUpsForm)
