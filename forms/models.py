@@ -106,12 +106,11 @@ class Handicraft(models.Model):
 
 
 class LandaGene(models.Model):
-<<<<<<< HEAD
-    full_name = models.CharField(max_length=500)
-    email = models.EmailField()
-    phone_number = models.CharField(max_length=250, blank=True)
-    company_name = models.CharField(max_length=500, blank=True, null=True)
-    created_at = models.DateTimeField(auto_now_add=True)
+    full_name = models.CharField('نام کامل', max_length=500)
+    email = models.EmailField(verbose_name='ایمیل')
+    phone_number = models.CharField('شماره موبایل', max_length=250, blank=True)
+    company_name = models.CharField('نام شرکت', max_length=500, blank=True, null=True)
+    created_at = models.DateTimeField('ساخته شده در', auto_now_add=True)
 
 
 class WorkWithUs(models.Model):
@@ -124,11 +123,4 @@ class WorkWithUs(models.Model):
     your_subfield = models.CharField(max_length=250)
     your_national_id_number = models.CharField(max_length=250)
     created_at = models.DateTimeField(auto_now_add=True)
-    
-=======
-    full_name = models.CharField('نام کامل', max_length=500)
-    email = models.EmailField(verbose_name='ایمیل')
-    phone_number = models.CharField('شماره موبایل', max_length=250, blank=True)
-    company_name = models.CharField('نام شرکت', max_length=500, blank=True, null=True)
-    created_at = models.DateTimeField('ساخته شده در', auto_now_add=True)
->>>>>>> b3574d6c8129933fc81bccac27fe7a13ff838f3a
+
