@@ -121,6 +121,7 @@ class WorkWithUs(models.Model):
     phone_number = models.CharField(max_length=250)
     your_field_of_study = models.CharField(max_length=250)
     your_subfield = models.CharField(max_length=250)
-    your_national_id_number = models.CharField(max_length=250)
+    cv_file = models.FileField(upload_to='workWithUs/cv_file', null=True, blank=True, editable=True)
+    email = models.EmailField('ایمیل', blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
