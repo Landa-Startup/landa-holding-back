@@ -55,6 +55,8 @@ class LandaGeneSerializer(serializers.ModelSerializer):
         read_only_fields = ['id', 'created_at']
 
 class WorkWithUsSerializers(serializers.ModelSerializer):
+    cv_file = serializers.FileField(required=False)
+    
     class Meta:
         model = WorkWithUs
         fields = '__all__'
