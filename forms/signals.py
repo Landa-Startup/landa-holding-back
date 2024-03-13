@@ -1,6 +1,3 @@
-import os
-import jdatetime
-from datetime import datetime
 from django.dispatch import receiver
 from django.core.mail import send_mail
 from django.conf import settings
@@ -19,6 +16,7 @@ from .models import StartUpsForm, ContactUs, PartnerMembership, InvestorRegistra
 @receiver(post_save, sender=ApplyJob)
 @receiver(post_save, sender=Handicraft)
 @receiver(post_save, sender=LandaGene)
+@receiver(post_save, sender=WorkWithUs)
 def send_create_form_email(sender, instance, created, **kwargs):
     if created:
         # send email
@@ -54,50 +52,54 @@ sms = Client(key)
 # message = "به خانواده بزرگ هلدینگ لاندا خوش آمدید! ضمن قدردانی از حسن انتخاب شما در صورت تمایل با شماره 09120539563 با ما در ارتباط باشید"
 fnumber = "983000505"
 
-@receiver(post_save,sender=ContactUs)
+
+@receiver(post_save, sender=ContactUs)
 def send_create_form_email(sender, instance, created, **kwargs):
     if created:
-        #send sms
-        phone = instance.number.replace('0','98',1)
+        # send sms
+        phone = instance.number.replace('0', '98', 1)
 
         message_id = sms.send_pattern(
-            pattern_code="otu9jfznbjgnsej",    # pattern code
-            sender=fnumber,# originator
+            pattern_code="otu9jfznbjgnsej",  # pattern code
+            sender=fnumber,  # originator
             recipient=phone,  # recipient
         )
-    
-@receiver(post_save,sender=Entrepreuneur)
+
+
+@receiver(post_save, sender=Entrepreuneur)
 def send_create_form_email(sender, instance, created, **kwargs):
     if created:
-        #send sms
-        phone = instance.phone.replace('0','98',1)
-
+        # send sms
+        phone = instance.phone.replace('0', '98', 1)
 
         message_id = sms.send_pattern(
-            pattern_code="otu9jfznbjgnsej",    # pattern code
-            sender=fnumber,# originator
+            pattern_code="otu9jfznbjgnsej",  # pattern code
+            sender=fnumber,  # originator
             recipient=phone,  # recipient
-        )  
-@receiver(post_save,sender=ApplyJob)
+        )
+
+
+@receiver(post_save, sender=ApplyJob)
 def send_create_form_email(sender, instance, created, **kwargs):
     if created:
-        #send sms
-        phone = instance.phoneNumber.replace('0','98',1)
-
+        # send sms
+        phone = instance.phoneNumber.replace('0', '98', 1)
 
         message_id = sms.send_pattern(
-            pattern_code="otu9jfznbjgnsej",    # pattern code
-            sender=fnumber,# originator
+            pattern_code="otu9jfznbjgnsej",  # pattern code
+            sender=fnumber,  # originator
             recipient=phone,  # recipient
-        )  
-@receiver(post_save,sender=LandaGene)
+        )
+
+
+@receiver(post_save, sender=LandaGene)
 def send_create_form_email(sender, instance, created, **kwargs):
     if created:
-        #send sms
-        phone = instance.phone_number.replace('0','+98',1)
+        # send sms
+        phone = instance.phone_number.replace('0', '+98', 1)
 
         message_id = sms.send_pattern(
-            pattern_code="otu9jfznbjgnsej",    # pattern code
-            sender=fnumber,# originator
+            pattern_code="otu9jfznbjgnsej",  # pattern code
+            sender=fnumber,  # originator
             recipient=phone,  # recipient
-        )  
+        )

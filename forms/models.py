@@ -35,6 +35,7 @@ class StartUpsForm(models.Model):
     currentInterestRate = models.TextField(blank=True)
     currentRaisedFunding = models.TextField(blank=True)
     neededCapital = models.TextField(blank=True)
+
     createdAt = models.DateTimeField(auto_now_add=True, blank=True)
     updatedAt = models.DateTimeField(auto_now=True, blank=True)
 
@@ -45,19 +46,21 @@ class ContactUs(models.Model):
     number = models.CharField('شماره موبایل', max_length=250, blank=True)
     subject = models.CharField('عنوان', max_length=500, blank=True)
     message = models.TextField('پیام', blank=True)
+
     createdAt = models.DateTimeField('ساخته شده در', auto_now_add=True, blank=True)
 
 
 class PartnerMembership(models.Model):
     firstName = models.CharField('نام', max_length=500, blank=True)
     lastName = models.CharField('نام خانوادگی', max_length=500, blank=True)
-    birthDate = models.DateField('تاریخ تولد', blank=True)
+    birthDate = models.DateField('تاریخ تولد', blank=True, null=True)
     email = models.EmailField('ایمیل', blank=True)
     countryOfResidence = models.CharField('کشور اقامت', max_length=500, blank=True)
     provinceOfResidence = models.CharField('استان اقامت', max_length=500, blank=True)
     companyName = models.CharField('اسم شرکت', max_length=500, blank=True)
     investmentCeiling = models.CharField('سقف سرمایه گذاری', max_length=500, blank=True)
     howDidYouKnowUs = models.CharField('چگونه با ما آشنا شدید', max_length=500, blank=True)
+
     createdAt = models.DateTimeField('ساخته شده در', auto_now_add=True, blank=True)
     updatedAt = models.DateTimeField('به روز شده در', auto_now=True, blank=True)
 
@@ -66,13 +69,15 @@ class InvestorRegistration(models.Model):
     firstName = models.CharField('نام', max_length=500, blank=True)
     lastName = models.CharField('نام خانوادگی', max_length=500, blank=True)
     email = models.EmailField('تاریخ تولد', blank=True)
-    birthDate = models.DateField('ایمیل', blank=True)
+    phoneNumber = models.CharField('شماره موبایل', max_length=250, blank=True)
+    birthDate = models.DateField('ایمیل', blank=True, null=True)
     countryOfResidence = models.CharField('کشور اقامت', max_length=500, blank=True)
     provinceOfResidence = models.CharField('استان اقامت', max_length=500, blank=True)
     companyName = models.CharField('اسم شرکت', max_length=500, blank=True)
     interests = models.CharField('علاقه ها', max_length=500, blank=True)
     preferredAreas = models.CharField('زمینه موردعلاقه', max_length=500, blank=True)
     howDidYouKnowUs = models.CharField('چگونه با ما آشنا شدید', max_length=500, blank=True)
+
     createdAt = models.DateTimeField('ساخته شده در', auto_now_add=True)
     updatedAt = models.DateTimeField('به روز شده در', auto_now=True)
 
@@ -83,6 +88,7 @@ class Entrepreuneur(models.Model):
     phone = models.CharField('شماره موبایل', max_length=300)
     website = models.CharField('سایت', max_length=500)
     fieldOfProfessional = models.CharField('زمینه حرفه ای', max_length=500)
+
     createdAt = models.DateTimeField('ساخته شده در', auto_now_add=True)
     updatedAt = models.DateTimeField('به روز شده در', auto_now=True)
 
@@ -93,6 +99,7 @@ class ApplyJob(models.Model):
     email = models.EmailField(verbose_name='ایمیل')
     phoneNumber = models.CharField('شماره موبایل', max_length=250, blank=True)
     cvFile = models.FileField(upload_to='cv-files', editable=True, null=True, blank=True)
+
     createdAt = models.DateTimeField('ساخته شده در', auto_now_add=True)
     updatedAt = models.DateTimeField('به روز شده در', auto_now=True)
 
@@ -102,6 +109,7 @@ class Handicraft(models.Model):
     last_name = models.CharField('نام خانوادگی', max_length=500)
     email = models.EmailField(verbose_name='ایمیل')
     organization = models.CharField('سازمان', max_length=500)
+
     created_at = models.DateTimeField('ساخته شده در', auto_now_add=True)
 
 
@@ -110,19 +118,19 @@ class LandaGene(models.Model):
     email = models.EmailField(verbose_name='ایمیل')
     phone_number = models.CharField('شماره موبایل', max_length=250, blank=True)
     company_name = models.CharField('نام شرکت', max_length=500, blank=True, null=True)
+
     created_at = models.DateTimeField('ساخته شده در', auto_now_add=True)
 
 
 class WorkWithUs(models.Model):
-    your_position = models.CharField(max_length=250)
-    type_of_contract = models.CharField(max_length=250)
+    # your_position = models.CharField(max_length=250)
+    # type_of_contract = models.CharField(max_length=250)
     your_first_name = models.CharField(max_length=250)
     your_last_name = models.CharField(max_length=250)
     phone_number = models.CharField(max_length=250)
-    your_field_of_study = models.CharField(max_length=250)
-    your_subfield = models.CharField(max_length=250)
+    # your_field_of_study = models.CharField(max_length=250)
+    # your_subfield = models.CharField(max_length=250)
     cv_file = models.FileField(upload_to='workWithUs/cv_file', null=True, blank=True, editable=True)
     email = models.EmailField('ایمیل', blank=True)
+
     created_at = models.DateTimeField(auto_now_add=True)
-
-

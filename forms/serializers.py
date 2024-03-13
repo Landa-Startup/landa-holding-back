@@ -18,12 +18,20 @@ class ContactUsSerializer(serializers.ModelSerializer):
         read_only_fields = ['id','createdAt']
 
 class PartnerMembershipSerializer(serializers.ModelSerializer):
+    countryOfResidence = serializers.CharField(required=False)
+    provinceOfResidence = serializers.CharField(required=False)
+
     class Meta:
         model = PartnerMembership
         fields = '__all__'
         read_only_fields = ['id','createdAt']
     
 class InvestorRegistrationSerializer(serializers.ModelSerializer):
+    countryOfResidence = serializers.CharField(required=False)
+    provinceOfResidence = serializers.CharField(required=False)
+    interests = serializers.CharField(required=False)
+    companyName = serializers.CharField(required=False)
+
     class Meta:
         model = InvestorRegistration
         fields = '__all__'
