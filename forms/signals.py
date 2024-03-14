@@ -1,6 +1,10 @@
+import os
+
 from django.dispatch import receiver
 from django.core.mail import send_mail
 from django.conf import settings
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 from django.db.models.signals import post_save
 from ippanel import Client
 # Import the Vacation model from your app's models
@@ -13,7 +17,6 @@ from .models import StartUpsForm, ContactUs, PartnerMembership, InvestorRegistra
 @receiver(post_save, sender=Entrepreuneur)
 @receiver(post_save, sender=PartnerMembership)
 @receiver(post_save, sender=InvestorRegistration)
-@receiver(post_save, sender=ApplyJob)
 @receiver(post_save, sender=Handicraft)
 @receiver(post_save, sender=LandaGene)
 @receiver(post_save, sender=WorkWithUs)
@@ -44,6 +47,40 @@ Gratitude for your astute selection Our primary objective at Landa International
             user_list_email,
             fail_silently=False,
             # html_message=email_content,  # Specify the HTML content here.
+        )
+
+
+@receiver(post_save, sender=ApplyJob)
+def send_apply_job_email(sender, instance, created, **kwargs):
+    if created:
+        template_path = os.path.join(
+            settings.BASE_DIR, 'templates', 'panel', 'email_workwithus_template.html')
+
+        template = render_to_string(template_path)
+
+        # send email
+        # Define the email subject and message
+        user_email = instance.email
+        user_list_email = [user_email]
+        from_email = "relation@landaholding.com"  # Replace with your email address
+        # Replace with the recipient's email address
+        company_emails_list = ["relation@landaholding.com"]
+
+        send_mail(
+            f"New filled Work With Us form from {user_email}",
+            f'We have a new Work With Us form from {user_email}',
+            from_email,
+            company_emails_list,
+            fail_silently=False,
+            # html_message=email_content,  # Specify the HTML content here.
+        )
+        send_mail(
+            "Work With Us",
+            template,
+            from_email,
+            user_list_email,
+            fail_silently=False,
+            html_message=template,  # Specify the HTML content here.
         )
 
 
@@ -78,9 +115,9 @@ def send_create_form_email(sender, instance, created, **kwargs):
             recipient=phone,  # recipient
         )
 
+
 @receiver(post_save, sender=InvestorRegistration)
 @receiver(post_save, sender=PartnerMembership)
-@receiver(post_save, sender=ApplyJob)
 def send_create_form_email(sender, instance, created, **kwargs):
     if created:
         # send sms
@@ -88,6 +125,19 @@ def send_create_form_email(sender, instance, created, **kwargs):
 
         message_id = sms.send_pattern(
             pattern_code="otu9jfznbjgnsej",  # pattern code
+            sender=fnumber,  # originator
+            recipient=phone,  # recipient
+        )
+
+
+@receiver(post_save, sender=ApplyJob)
+def send_create_form_email(sender, instance, created, **kwargs):
+    if created:
+        # send sms
+        phone = instance.phoneNumber.replace('0', '98', 1)
+
+        message_id = sms.send_pattern(
+            pattern_code="ojdm8oeg4w1recs",  # pattern code
             sender=fnumber,  # originator
             recipient=phone,  # recipient
         )
