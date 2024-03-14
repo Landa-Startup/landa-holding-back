@@ -78,7 +78,8 @@ def send_create_form_email(sender, instance, created, **kwargs):
             recipient=phone,  # recipient
         )
 
-
+@receiver(post_save, sender=InvestorRegistration)
+@receiver(post_save, sender=PartnerMembership)
 @receiver(post_save, sender=ApplyJob)
 def send_create_form_email(sender, instance, created, **kwargs):
     if created:

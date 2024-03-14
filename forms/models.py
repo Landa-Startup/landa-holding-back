@@ -55,6 +55,7 @@ class PartnerMembership(models.Model):
     lastName = models.CharField('نام خانوادگی', max_length=500, blank=True)
     birthDate = models.DateField('تاریخ تولد', blank=True, null=True)
     email = models.EmailField('ایمیل', blank=True)
+    phoneNumber = models.CharField('شماره موبایل', max_length=250, blank=True)
     countryOfResidence = models.CharField('کشور اقامت', max_length=500, blank=True)
     provinceOfResidence = models.CharField('استان اقامت', max_length=500, blank=True)
     companyName = models.CharField('اسم شرکت', max_length=500, blank=True)
@@ -83,6 +84,8 @@ class InvestorRegistration(models.Model):
 
 
 class Entrepreuneur(models.Model):
+    first_name = models.CharField('نام', max_length=500)
+    last_name = models.CharField('نام خانوادگی', max_length=500)
     email = models.EmailField('ایمیل')
     companyName = models.CharField('نام شرکت', max_length=300)
     phone = models.CharField('شماره موبایل', max_length=300)
@@ -123,13 +126,13 @@ class LandaGene(models.Model):
 
 
 class WorkWithUs(models.Model):
-    # your_position = models.CharField(max_length=250)
-    # type_of_contract = models.CharField(max_length=250)
+    your_position = models.CharField(max_length=250)
+    type_of_contract = models.CharField(max_length=250)
     your_first_name = models.CharField(max_length=250)
     your_last_name = models.CharField(max_length=250)
     phone_number = models.CharField(max_length=250)
-    # your_field_of_study = models.CharField(max_length=250)
-    # your_subfield = models.CharField(max_length=250)
+    your_field_of_study = models.CharField(max_length=250)
+    your_subfield = models.CharField(max_length=250)
     cv_file = models.FileField(upload_to='workWithUs/cv_file', null=True, blank=True, editable=True)
     email = models.EmailField('ایمیل', blank=True)
 
