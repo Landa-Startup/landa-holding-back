@@ -22,17 +22,47 @@ from .models import StartUpsForm, ContactUs, PartnerMembership, InvestorRegistra
 @receiver(post_save, sender=WorkWithUs)
 def send_create_form_email(sender, instance, created, **kwargs):
     if created:
+        template_path = os.path.join(
+            settings.BASE_DIR, 'templates', 'panel', 'welcome_email_template.html')
+
+        template = render_to_string(template_path)
         # send email
         # Define the email subject and message
+        form_name = str(instance).split(' ')[0]
         user_email = instance.email
+        user_phone = ''
+        user_full_name = ''
+
+        try:
+            user_phone = instance.phoneNumber
+        except AttributeError:
+            try:
+                user_phone = instance.phone
+            except AttributeError:
+                try:
+                    user_phone = instance.phone_number
+                except AttributeError:
+                    pass
+
+        try:
+            user_full_name = f"{instance.firstName} {instance.lastName}"
+        except AttributeError:
+            try:
+                user_full_name = f"{instance.first_name} {instance.last_name}"
+            except AttributeError:
+                try:
+                    user_full_name = instance.full_name
+                except AttributeError:
+                    pass
+
         user_list_email = [user_email]
         from_email = "relation@landaholding.com"  # Replace with your email address
         # Replace with the recipient's email address
         company_emails_list = ["relation@landaholding.com"]
 
         send_mail(
-            f"New filled form from {user_email}",
-            f'We have a new filled form from {user_email}',
+            f"New filled {form_name} from {user_email}",
+            f'We have a new filled form with\nemail: {user_email}, phone: {user_phone}, name: {user_full_name}',
             from_email,
             company_emails_list,
             fail_silently=False,
@@ -40,13 +70,11 @@ def send_create_form_email(sender, instance, created, **kwargs):
         )
         send_mail(
             "Greetings and welcome to the Landa family",
-            """Greetings and welcome to the Landa family
-Gratitude for your astute selection Our primary objective at Landa International Holding is to deliver optimal services and ensure your satisfaction.
-""",
+            template,
             from_email,
             user_list_email,
             fail_silently=False,
-            # html_message=email_content,  # Specify the HTML content here.
+            html_message=template,   # Specify the HTML content here.
         )
 
 
@@ -61,6 +89,8 @@ def send_apply_job_email(sender, instance, created, **kwargs):
         # send email
         # Define the email subject and message
         user_email = instance.email
+        user_phone = instance.phoneNumber
+        user_full_name = instance.firstName + instance.lastName
         user_list_email = [user_email]
         from_email = "relation@landaholding.com"  # Replace with your email address
         # Replace with the recipient's email address
@@ -68,7 +98,7 @@ def send_apply_job_email(sender, instance, created, **kwargs):
 
         send_mail(
             f"New filled Work With Us form from {user_email}",
-            f'We have a new Work With Us form from {user_email}',
+            f'We have a new Work With Us form with \nemail: {user_email}, phone: {user_phone}, name: {user_full_name}',
             from_email,
             company_emails_list,
             fail_silently=False,

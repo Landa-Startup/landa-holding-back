@@ -55,7 +55,7 @@ class PartnerMembership(models.Model):
     lastName = models.CharField('نام خانوادگی', max_length=500, blank=True)
     birthDate = models.DateField('تاریخ تولد', blank=True, null=True)
     email = models.EmailField('ایمیل', blank=True)
-    phoneNumber = models.CharField('شماره موبایل', max_length=250, blank=True)
+    phoneNumber = models.CharField('شماره موبایل', max_length=250, blank=True, null=True)
     countryOfResidence = models.CharField('کشور اقامت', max_length=500, blank=True)
     provinceOfResidence = models.CharField('استان اقامت', max_length=500, blank=True)
     companyName = models.CharField('اسم شرکت', max_length=500, blank=True)
@@ -70,7 +70,7 @@ class InvestorRegistration(models.Model):
     firstName = models.CharField('نام', max_length=500, blank=True)
     lastName = models.CharField('نام خانوادگی', max_length=500, blank=True)
     email = models.EmailField('تاریخ تولد', blank=True)
-    phoneNumber = models.CharField('شماره موبایل', max_length=250, blank=True)
+    phoneNumber = models.CharField('شماره موبایل', max_length=250, blank=True, null=True)
     birthDate = models.DateField('ایمیل', blank=True, null=True)
     countryOfResidence = models.CharField('کشور اقامت', max_length=500, blank=True)
     provinceOfResidence = models.CharField('استان اقامت', max_length=500, blank=True)
@@ -84,8 +84,8 @@ class InvestorRegistration(models.Model):
 
 
 class Entrepreuneur(models.Model):
-    first_name = models.CharField('نام', max_length=500)
-    last_name = models.CharField('نام خانوادگی', max_length=500)
+    first_name = models.CharField('نام', max_length=500, null=True)
+    last_name = models.CharField('نام خانوادگی', max_length=500, null=True)
     email = models.EmailField('ایمیل')
     companyName = models.CharField('نام شرکت', max_length=300)
     phone = models.CharField('شماره موبایل', max_length=300)
@@ -110,6 +110,7 @@ class ApplyJob(models.Model):
 class Handicraft(models.Model):
     first_name = models.CharField('نام', max_length=500)
     last_name = models.CharField('نام خانوادگی', max_length=500)
+    phone_number = models.CharField('شماره موبایل', max_length=250, blank=True)
     email = models.EmailField(verbose_name='ایمیل')
     organization = models.CharField('سازمان', max_length=500)
 
