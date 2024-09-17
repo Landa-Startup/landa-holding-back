@@ -58,7 +58,7 @@ def send_create_form_email(sender, instance, created, **kwargs):
         user_list_email = [user_email]
         from_email = "relation@landaholding.com"  # Replace with your email address
         # Replace with the recipient's email address
-        company_emails_list = ["relation@landaholding.com"]
+        company_emails_list = ["relation@landaholding.com" , "office@irimmigration.ca"]
 
         send_mail(
             f"New filled {form_name} from {user_email}",
@@ -94,7 +94,7 @@ def send_apply_job_email(sender, instance, created, **kwargs):
         user_list_email = [user_email]
         from_email = "relation@landaholding.com"  # Replace with your email address
         # Replace with the recipient's email address
-        company_emails_list = ["relation@landaholding.com"]
+        company_emails_list = ["relation@landaholding.com" , "office@irimmigration.ca"]
 
         send_mail(
             f"New filled Work With Us form from {user_email}",
