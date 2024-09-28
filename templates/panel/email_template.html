@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>New Vacation Form</title>
+    <style>
+      /* Reset default button styles */
+      button {
+        border: none;
+        padding: 0;
+        background: none;
+        cursor: pointer;
+        text-align: center;
+        margin-left: 10px;
+      }
+
+      /* Stylish button styles */
+      .stylish-button {
+        background-color: #3498db; /* Button background color */
+        color: #ffffff; /* Text color */
+        border: none; /* Remove button border */
+        border-radius: 5px; /* Rounded corners */
+        padding: 10px 20px; /* Padding inside the button */
+        font-size: 16px; /* Font size */
+        transition: background-color 0.3s ease; /* Smooth hover transition */
+
+        /* Optional: Add a box-shadow for depth */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      }
+
+      .stylish-button:hover {
+        background-color: #2980b9; /* Change color on hover */
+      }
+
+      /* Styling for the table */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+
+      th, td {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+      }
+
+      th {
+        background-color: #3498db;
+        color: white;
+      }
+
+      tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Hello, {{ recipient_name }} Add A new Request Vacation</h1>
+    <p>A new vacation request has been created.</p>
+    <br />
+    <table>
+      <tr>
+        <th>User Name</th>
+        <th>Start Time</th>
+        <th>End Time</th>
+      </tr>
+      <tr>
+        <td>{{ recipient_name }}</td>
+        <td>{{start_time}}</td>
+        <td>{{end_time}}</td>
+      </tr>
+    </table>
+    <br>
+    <a href="http://127.0.0.1:80000/panel/approve/{{uuid}}"><button class="stylish-button">Approved</button></a>
+    <a href="http://127.0.0.1:8000/panel/decline/{{uuid}}"><button class="stylish-button">Declined</button></a>
+
+  </body>
+</html>
