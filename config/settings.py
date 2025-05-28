@@ -16,6 +16,15 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True  # or EMAIL_USE_SSL = True
+EMAIL_HOST = 'smtp.office365.com'
+EMAIL_PORT = 587  # or 465 for SSL
+EMAIL_HOST_USER = 'amir.esfahanizadeh@landaholding.com'
+EMAIL_HOST_PASSWORD = 'F!835563246614ox'
+DEFAULT_FROM_EMAIL = 'amir.esfahanizadeh@landaholding.com'
+
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
