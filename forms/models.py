@@ -73,3 +73,16 @@ class InvestorRegistration(models.Model):
   howDidYouKnowUs=models.CharField(max_length=500, blank=True)
   createdAt=models.DateTimeField(auto_now_add=True)
   updatedAt=models.DateTimeField(auto_now=True)
+
+
+class Entrepreneur(models.Model):
+  firstName=models.CharField(max_length=500, blank=True)
+  lastName=models.CharField(max_length=500, blank=True)
+  email=models.EmailField(blank=True)
+  birthDate=models.DateField(blank=True)
+  countryOfResidence=models.CharField(max_length=500, blank=True)
+  provinceOfResidence=models.CharField(max_length=500, blank=True)
+  companyName=models.CharField(max_length=500, blank=True)
+  investmentCeiling=models.CharField(max_length=500, blank=True)
+  preferredAreas=models.CharField(max_length=500, blank=True)
+  howDidYouKnowUs=models.CharField(max_length=500, blank=True)  
